@@ -10,6 +10,8 @@ package com.illuzionzstudios.discordlibrary;
  * this statement.
  */
 
+import com.illuzionzstudios.discordlibrary.command.CommandManager;
+import com.illuzionzstudios.discordlibrary.command.type.Command;
 import lombok.Getter;
 import lombok.Setter;
 import net.dv8tion.jda.api.JDABuilder;
@@ -34,9 +36,18 @@ public abstract class DiscordBot extends Launcher {
     @Setter
     public String name;
 
+    /**
+     * The prefix to use for all commands, default is !
+     */
     @Getter
     @Setter
     public static String commandPrefix = "!";
+
+    /**
+     * Default command manager
+     */
+    @Getter
+    public CommandManager commandManager;
 
     /**
      * Instance of our builder to create the bot
@@ -53,6 +64,8 @@ public abstract class DiscordBot extends Launcher {
         }
 
         onBotStartup();
+
+        commandManager = new CommandManager();
     }
 
     /**
@@ -63,6 +76,13 @@ public abstract class DiscordBot extends Launcher {
     public void setToken(String token) {
         TOKEN = token;
         botBuilder.setToken(TOKEN);
+    }
+
+    /**
+     * Shorthand to register a command
+     */
+    public void registerCommand(Command command) {
+        this.commandManager.registerCommand(command);
     }
 
     /**

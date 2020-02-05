@@ -28,8 +28,19 @@ public class DiscordBot {
      */
     DiscordApplication registered;
 
+    /**
+     * Register a discord application
+     *
+     * @param application The discord application
+     */
     public void registerApplication(DiscordApplication application) {
         this.registered = application;
+    }
+
+    /**
+     * Override to register services
+     */
+    public void registerServices() {
     }
 
     public DiscordBot() {

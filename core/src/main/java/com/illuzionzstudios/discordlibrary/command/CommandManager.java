@@ -62,9 +62,11 @@ public class CommandManager extends ListenerAdapter {
 
         // Has requested to execute command
         if (message.getContentRaw().startsWith(DiscordBot.getCommandPrefix())) {
-            String[] args = message.getContentRaw().split(" ");
-            String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
+            // Command string without prefix
+            String commandString = message.getContentRaw().substring(1);
+            String[] args = commandString.split(" ");
             Command command = getCommand(args[0]);
+            String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
 
             if (command != null) {
                 command.execute(message, newArgs);

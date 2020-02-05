@@ -44,7 +44,7 @@ public abstract class DiscordBot extends Launcher {
     public static String commandPrefix = "!";
 
     /**
-     * Default command manager
+     * Default command manager for the bot
      */
     @Getter
     public CommandManager commandManager;

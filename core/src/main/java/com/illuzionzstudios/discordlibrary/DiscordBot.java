@@ -52,23 +52,23 @@ public abstract class DiscordBot extends Launcher {
     /**
      * Instance of our builder to create the bot
      */
+    @Getter
     public JDABuilder botBuilder;
 
     @Override
     public void initialize() {
         commandManager = new CommandManager();
-
         botBuilder = new JDABuilder();
-        createBot(botBuilder);
-        botBuilder.addEventListeners(commandManager);
-        onBotStartup();
 
-        try {
-            botBuilder.build();
-        } catch (LoginException ex) {
-            ex.printStackTrace();
-            System.out.println("Error logging in the bot");
-        }
+        createBot();
+        onBotStartup();
+    }
+
+    /**
+     * Call if you want tp use commands
+     */
+    public void useCommands() {
+        botBuilder.addEventListeners(commandManager);
     }
 
     /**
@@ -90,10 +90,8 @@ public abstract class DiscordBot extends Launcher {
 
     /**
      * Create an instance of the bot
-     *
-     * @param jda The JDA instance to build the bot
      */
-    public abstract void createBot(JDABuilder jda);
+    public abstract void createBot();
 
     /**
      * Called when the bot is created, then starts up

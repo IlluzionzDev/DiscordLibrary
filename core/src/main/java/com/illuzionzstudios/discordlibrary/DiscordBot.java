@@ -26,18 +26,22 @@ public class DiscordBot {
     /**
      * Registered instance of the application
      */
-    private static DiscordApplication registered;
+    private DiscordApplication registered;
 
     /**
      * Register a discord application
      *
      * @param application The discord application
      */
-    public static void registerApplication(DiscordApplication application) {
+    public void registerApplication(DiscordApplication application) {
         registered = application;
     }
 
+    public void registerServices() {};
+
     public DiscordBot() {
+        registerServices();
+
         commandManager = new CommandManager();
         botBuilder = new JDABuilder();
 

@@ -37,16 +37,11 @@ public class DiscordBot {
         this.registered = application;
     }
 
-    /**
-     * Override to register services
-     */
-    public void registerServices() {
-    }
-
     public DiscordBot() {
-        registerServices();
-
-        if (registered == null) return;
+        if (registered == null) {
+            System.out.println("Application not registered");
+            return;
+        }
 
         commandManager = new CommandManager();
         botBuilder = new JDABuilder();
@@ -61,13 +56,6 @@ public class DiscordBot {
             ex.printStackTrace();
             System.out.println("Error logging in the bot");
         }
-    }
-
-    /**
-     * Entry point of bot
-     */
-    public static void main(String[] args) {
-        new DiscordBot();
     }
 
     /**

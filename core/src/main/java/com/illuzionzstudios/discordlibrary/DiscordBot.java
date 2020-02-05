@@ -58,11 +58,12 @@ public abstract class DiscordBot extends Launcher {
     public void initialize() {
         commandManager = new CommandManager();
 
+        botBuilder = new JDABuilder();
+        createBot(botBuilder);
+        botBuilder.addEventListeners(commandManager);
+        onBotStartup();
+
         try {
-            botBuilder = new JDABuilder();
-            createBot(botBuilder);
-            botBuilder.addEventListeners(commandManager);
-            onBotStartup();
             botBuilder.build();
         } catch (LoginException ex) {
             ex.printStackTrace();
@@ -92,7 +93,7 @@ public abstract class DiscordBot extends Launcher {
      *
      * @param jda The JDA instance to build the bot
      */
-    public abstract void createBot(JDABuilder jda) throws LoginException;
+    public abstract void createBot(JDABuilder jda);
 
     /**
      * Called when the bot is created, then starts up

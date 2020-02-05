@@ -38,11 +38,6 @@ public class DiscordBot {
     }
 
     public DiscordBot() {
-        if (registered == null) {
-            System.out.println("Application not registered");
-            return;
-        }
-
         commandManager = new CommandManager();
         botBuilder = new JDABuilder();
 

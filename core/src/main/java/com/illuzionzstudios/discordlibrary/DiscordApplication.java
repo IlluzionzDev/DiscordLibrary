@@ -10,26 +10,21 @@ package com.illuzionzstudios.discordlibrary;
  * this statement.
  */
 
-/**
- * Wrapper to launch the discord bot
- */
-public class Launcher {
-
-    public Launcher() {
-        initialize();
-    }
+public interface DiscordApplication {
 
     /**
-     * Overridden to init the bit
+     * Called when the application is started up
      */
-    public void initialize() {
-    }
+    void start();
 
     /**
-     * Entry point of bot
+     * Build the app/bot, then call onStartup
      */
-    public static void main(String[] args) {
-        new Launcher();
-    }
+    void buildApplication();
+
+    /**
+     * Called when everything else is loaded
+     */
+    void loaded();
 
 }

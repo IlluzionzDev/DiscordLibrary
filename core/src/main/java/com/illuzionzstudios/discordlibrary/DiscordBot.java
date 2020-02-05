@@ -21,7 +21,41 @@ import javax.security.auth.login.LoginException;
 /**
  * Main class to extend to create a new discord bot
  */
-public abstract class DiscordBot extends Launcher {
+public class DiscordBot {
+
+    /**
+     * Registered instance of the application
+     */
+    DiscordApplication registered;
+
+    public void registerApplication(DiscordApplication application) {
+        this.registered = application;
+    }
+
+    public DiscordBot() {
+        if (registered == null) return;
+
+        commandManager = new CommandManager();
+        botBuilder = new JDABuilder();
+
+        registered.start();
+        registered.buildApplication();
+        registered.loaded();
+
+        try {
+            botBuilder.build();
+        } catch (LoginException ex) {
+            ex.printStackTrace();
+            System.out.println("Error logging in the bot");
+        }
+    }
+
+    /**
+     * Entry point of bot
+     */
+    public static void main(String[] args) {
+        new DiscordBot();
+    }
 
     /**
      * Token for the bot
@@ -55,15 +89,6 @@ public abstract class DiscordBot extends Launcher {
     @Getter
     public JDABuilder botBuilder;
 
-    @Override
-    public void initialize() {
-        commandManager = new CommandManager();
-        botBuilder = new JDABuilder();
-
-        createBot();
-        onBotStartup();
-    }
-
     /**
      * Call if you want tp use commands
      */
@@ -87,15 +112,5 @@ public abstract class DiscordBot extends Launcher {
     public void registerCommand(Command command) {
         this.commandManager.registerCommand(command);
     }
-
-    /**
-     * Create an instance of the bot
-     */
-    public abstract void createBot();
-
-    /**
-     * Called when the bot is created, then starts up
-     */
-    public abstract void onBotStartup();
 
 }

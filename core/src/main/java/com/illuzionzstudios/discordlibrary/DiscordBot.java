@@ -26,15 +26,15 @@ public class DiscordBot {
     /**
      * Registered instance of the application
      */
-    DiscordApplication registered;
+    private static DiscordApplication registered;
 
     /**
      * Register a discord application
      *
      * @param application The discord application
      */
-    public void registerApplication(DiscordApplication application) {
-        this.registered = application;
+    public static void registerApplication(DiscordApplication application) {
+        registered = application;
     }
 
     public DiscordBot() {

@@ -43,7 +43,7 @@ public abstract class Command {
      * @param message The message object that was sent to call command
      * @param args Arguments following command
      */
-    public abstract void execute(Message message, List<String> args);
+    public abstract void execute(Message message, String[] args);
 
     public void addAlias(String alias) {
         this.aliases.add(alias);

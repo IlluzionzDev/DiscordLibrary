@@ -37,7 +37,7 @@ public class DiscordBot {
         registered = application;
     }
 
-    public void registerServices() {};
+    public void registerServices() {}
 
     public DiscordBot() {
         registerServices();

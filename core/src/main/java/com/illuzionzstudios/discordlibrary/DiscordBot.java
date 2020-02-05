@@ -44,6 +44,8 @@ public class DiscordBot {
     }
 
     public DiscordBot() {
+        registerServices();
+
         if (registered == null) return;
 
         commandManager = new CommandManager();

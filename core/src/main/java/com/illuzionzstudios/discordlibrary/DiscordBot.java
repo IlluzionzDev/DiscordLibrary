@@ -14,7 +14,10 @@ import com.illuzionzstudios.discordlibrary.command.CommandManager;
 import com.illuzionzstudios.discordlibrary.command.type.Command;
 import lombok.Getter;
 import lombok.Setter;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
 
@@ -22,6 +25,9 @@ import javax.security.auth.login.LoginException;
  * Main class to extend to create a new discord bot
  */
 public class DiscordBot {
+
+    @Getter
+    public JDA api;
 
     /**
      * Registered instance of the application
@@ -44,6 +50,13 @@ public class DiscordBot {
 
         commandManager = new CommandManager();
         botBuilder = new JDABuilder();
+
+        // Pass the API Instance
+        botBuilder.addEventListeners(new ListenerAdapter() {
+            @Override public void onReady(ReadyEvent event) {
+                api = event.getJDA();
+            }
+        });
 
         registered.start();
         registered.buildApplication();

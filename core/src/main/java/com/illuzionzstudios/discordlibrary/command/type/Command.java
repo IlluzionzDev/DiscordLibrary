@@ -35,7 +35,7 @@ public abstract class Command {
      * Alternate names for command
      */
     @Getter
-    public List<String> aliases = new ArrayList<String>();
+    public List<String> aliases = new ArrayList<>();
 
     /**
      * Run when command is called

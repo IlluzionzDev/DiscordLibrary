@@ -21,7 +21,7 @@ public abstract class Embed {
     /**
      * Instance of embed builder to use
      */
-    EmbedBuilder embed = new EmbedBuilder();
+    protected EmbedBuilder embed = new EmbedBuilder();
 
     /**
      * Create the embed and return as a message embed

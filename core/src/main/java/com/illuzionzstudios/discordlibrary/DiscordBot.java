@@ -51,16 +51,17 @@ public class DiscordBot {
         commandManager = new CommandManager();
         botBuilder = new JDABuilder();
 
+        registered.start();
+        registered.buildApplication();
+
         // Pass the API Instance
         botBuilder.addEventListeners(new ListenerAdapter() {
             @Override public void onReady(ReadyEvent event) {
                 api = event.getJDA();
+
+                registered.loaded();
             }
         });
-
-        registered.start();
-        registered.buildApplication();
-        registered.loaded();
 
         try {
             botBuilder.build();

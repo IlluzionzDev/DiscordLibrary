@@ -12,6 +12,7 @@ package com.illuzionzstudios.discordlibrary.command;
 
 import com.illuzionzstudios.discordlibrary.DiscordBot;
 import com.illuzionzstudios.discordlibrary.command.type.Command;
+import com.illuzionzstudios.discordlibrary.embed.NoPermissionEmbed;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -40,7 +41,6 @@ public class CommandManager extends ListenerAdapter {
      * Find a command from name or alias
      */
     public Command getCommand(String name) {
-        System.out.println(this.commands);
         for (Command com : this.commands) {
             if (com.getName().equalsIgnoreCase(name)) return com;
             for (String alias : com.aliases) {
@@ -69,7 +69,18 @@ public class CommandManager extends ListenerAdapter {
             String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
 
             if (command != null) {
-                command.execute(message, newArgs);
+                // Check permission is set
+                if (command.getPermission() != null) {
+                    // Has permission so execute else
+                    if (event.getMember().getPermissions().contains(command.getPermission())) {
+                        command.execute(message, newArgs);
+                    } else {
+                        event.getChannel().sendMessage(new NoPermissionEmbed().createEmbed()).queue();
+                    }
+                    // Execute if no permission set
+                } else {
+                    command.execute(message, newArgs);
+                }
             }
         }
 

@@ -83,7 +83,7 @@ public class DiscordBot {
      */
     @Getter
     @Setter
-    public String name;
+    public static String name;
 
     /**
      * The prefix to use for all commands, default is !

@@ -1,6 +1,8 @@
 package com.illuzionzstudios.discordlibrary.command.type;
 
 import lombok.Getter;
+import lombok.Setter;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 
 import java.util.ArrayList;
@@ -36,6 +38,13 @@ public abstract class Command {
      */
     @Getter
     public List<String> aliases = new ArrayList<>();
+
+    /**
+     * Permission for the command
+     */
+    @Getter
+    @Setter
+    public Permission permission;
 
     /**
      * Run when command is called

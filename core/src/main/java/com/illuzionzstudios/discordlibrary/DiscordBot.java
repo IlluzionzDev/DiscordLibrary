@@ -18,6 +18,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 
 import javax.security.auth.login.LoginException;
 
@@ -56,7 +57,7 @@ public class DiscordBot {
 
         // Pass the API Instance
         botBuilder.addEventListeners(new ListenerAdapter() {
-            @Override public void onReady(ReadyEvent event) {
+            @Override public void onReady(@NotNull ReadyEvent event) {
                 api = event.getJDA();
 
                 registered.loaded();

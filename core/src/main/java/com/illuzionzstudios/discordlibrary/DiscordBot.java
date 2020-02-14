@@ -64,12 +64,22 @@ public class DiscordBot {
             }
         });
 
+        // Override build so will be handled there
+        if (overrideBuild()) return;
+
         try {
             botBuilder.build();
         } catch (LoginException ex) {
             ex.printStackTrace();
             System.out.println("Error logging in the bot");
         }
+    }
+
+    /**
+     * Force take over building bot for custom building
+     */
+    public boolean overrideBuild() {
+        return false;
     }
 
     /**

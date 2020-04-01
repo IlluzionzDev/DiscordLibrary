@@ -33,6 +33,13 @@ public class CommandManager extends ListenerAdapter {
     private Set<Command> commands = new HashSet<Command>();
 
     public void registerCommand(Command command) {
+        // Don't register command with same name
+        // Isn't handled int as we could create new
+        // instance of command with same name
+        for (Command cmd : commands) {
+            if (command.getName().equalsIgnoreCase(cmd.getName())) return;
+        }
+
         System.out.println("Registered command " + command.getName());
         this.commands.add(command);
     }
